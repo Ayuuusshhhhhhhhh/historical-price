@@ -1,6 +1,8 @@
 const express = require('express');
 const priceQueue = require('../queues/priceQueue');
 
+const redisClient = require('../utils/redisClient'); // ✅ Add this if missing
+
 const router = express.Router();
 
 router.post('/', async (req, res) => {
