@@ -1,10 +1,9 @@
-console.log("📦 Using Redis URL:", process.env.REDIS_URL);
-
 const { createClient } = require("redis");
-require("dotenv").config();
+
+console.log("📦 REDIS_URL from env:", process.env.REDIS_URL); // ← ✅ debug line
 
 const redisClient = createClient({
-  url: process.env.REDIS_URL, // Make sure this is from Render
+  url: process.env.REDIS_URL,
   socket: {
     tls: true,
     rejectUnauthorized: false,
@@ -12,6 +11,7 @@ const redisClient = createClient({
 });
 
 redisClient.on("error", (err) => console.error("❌ Redis error", err));
+
 redisClient.connect().then(() => {
   console.log("✅ Connected to Redis");
 });
