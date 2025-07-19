@@ -1,6 +1,6 @@
 const { createClient } = require("redis");
 
-console.log("📦 REDIS_URL from env:", process.env.REDIS_URL); // ← ✅ debug line
+console.log("📦 Using Redis URL:", process.env.REDIS_URL); // ← DEBUG LINE
 
 const redisClient = createClient({
   url: process.env.REDIS_URL,
