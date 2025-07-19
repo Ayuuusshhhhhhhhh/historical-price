@@ -1,3 +1,5 @@
+console.log("📦 Using Redis URL:", process.env.REDIS_URL);
+
 const { createClient } = require("redis");
 require("dotenv").config();
 
