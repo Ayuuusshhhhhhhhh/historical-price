@@ -1,17 +1,17 @@
-const { createClient } = require('redis');
+const { createClient } = require("redis");
+require("dotenv").config();
 
-const client = createClient({
-  url: process.env.REDIS_URL,
+const redisClient = createClient({
+  url: process.env.REDIS_URL, // ✅ This is what Render injects
+  socket: {
+    tls: true, // ✅ Needed for Upstash
+    rejectUnauthorized: false, // ✅ Safe for public Upstash
+  },
 });
 
-client.on('error', (err) => {
-  console.error('❌ Redis error', err);
+redisClient.on("error", (err) => console.error("❌ Redis error", err));
+redisClient.connect().then(() => {
+  console.log("✅ Connected to Redis");
 });
 
-client.on('connect', () => {
-  console.log('✅ Connected to Redis');
-});
-
-client.connect();
-
-module.exports = client;
+module.exports = redisClient;
