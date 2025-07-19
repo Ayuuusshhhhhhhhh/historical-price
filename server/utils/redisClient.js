@@ -2,10 +2,10 @@ const { createClient } = require("redis");
 require("dotenv").config();
 
 const redisClient = createClient({
-  url: process.env.REDIS_URL, // ✅ This is what Render injects
+  url: process.env.REDIS_URL, // Make sure this is from Render
   socket: {
-    tls: true, // ✅ Needed for Upstash
-    rejectUnauthorized: false, // ✅ Safe for public Upstash
+    tls: true,
+    rejectUnauthorized: false,
   },
 });
 
