@@ -35,9 +35,14 @@ export default function Home() {
       if (!response.ok) throw new Error(data.error || "Something went wrong");
 
       setPrice(data.price);
-    } catch (err: any) {
-      setError(err.message || "Request failed");
-    }
+    } catch (err: unknown) {
+  if (err instanceof Error) {
+    setError(err.message);
+  } else {
+    setError("Request failed");
+  }
+}
+
   };
 
   const handleSchedule = async () => {
@@ -62,9 +67,14 @@ export default function Home() {
       if (!response.ok) throw new Error(data.error || "Schedule failed");
 
       alert("📅 Price fetch scheduled successfully!");
-    } catch (err: any) {
-      setError(err.message || "Request failed");
-    }
+    } catch (err: unknown) {
+  if (err instanceof Error) {
+    setError(err.message);
+  } else {
+    setError("Request failed");
+  }
+}
+
   };
 
   return (
