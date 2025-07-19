@@ -1,15 +1,16 @@
+require("dotenv").config(); // Make sure this is at the VERY top
+
 const { createClient } = require("redis");
 
-const redisUrl = process.env.REDIS_URL;
-console.log("📦 Loaded REDIS_URL:", redisUrl);
+console.log("📦 Loaded REDIS_URL from .env or Render:", process.env.REDIS_URL);
 
-if (!redisUrl) {
-  console.error("❌ REDIS_URL is missing! Check your Render Environment Variables.");
+if (!process.env.REDIS_URL) {
+  console.error("❌ REDIS_URL is undefined. Check Render environment settings.");
   process.exit(1);
 }
 
 const redisClient = createClient({
-  url: redisUrl,
+  url: process.env.REDIS_URL,
   socket: {
     tls: true,
     rejectUnauthorized: false,
@@ -22,7 +23,7 @@ redisClient.on("error", (err) => {
 
 redisClient.connect()
   .then(() => {
-    console.log("✅ Successfully connected to Redis");
+    console.log("✅ Connected to Redis successfully");
   })
   .catch((err) => {
     console.error("❌ Redis failed to connect:", err);
