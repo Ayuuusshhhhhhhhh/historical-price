@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
-  },
+  "start": "node index.js",
+  "dev": "nodemon index.js",
+  "worker": "node queues/worker.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
